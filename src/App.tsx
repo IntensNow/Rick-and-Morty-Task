@@ -6,6 +6,7 @@ import {
   Routes,
 } from "react-router-dom";
 import Card from './features/Card/Card';
+import Register from './features/Register/Register';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div className="App">
         app
           <Routes>
+            <Route path="/" element={<Register/>}/>
             <Route path="/:id" element={<Card/>}/>
           </Routes>
       </div>

@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import cardReducer from '../features/Card/cardSlice';
+import registerReducer from '../features/Register/registerSlice';
 
 export const store = configureStore({
   reducer: {
-    card: cardReducer
+    card: cardReducer,
+    register: registerReducer
   },
 });
 
