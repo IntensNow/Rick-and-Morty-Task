@@ -6,7 +6,9 @@ import { loadCharacters, selectRegister } from "./registerSlice";
 import { useNavigate } from "react-router-dom";
 
 import styles from './Register.module.css';
+
 import Paging from "../../views/Paging";
+import Input from "../../views/Input";
 
 export default function Register() {
 
@@ -24,7 +26,7 @@ export default function Register() {
                     <tr>
                     <th></th>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Name <Input onChange={value => {}}/></th>
                     <th>Species</th>
                     </tr>
                 </thead>
