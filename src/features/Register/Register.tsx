@@ -3,20 +3,23 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
 import { loadCharacters, selectRegister } from "./registerSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import styles from './Register.module.css';
+import Paging from "../../views/Paging";
 
 export default function Register() {
 
-    const { characters } = useAppSelector(selectRegister);
+    const { characters, paging } = useAppSelector(selectRegister);
     const dispatch = useAppDispatch();
     let navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(loadCharacters());
+        dispatch(loadCharacters(1));
     }, [])
 
     return <div>
-            <Table striped bordered hover width={'1200px'}>
+            <Table striped bordered hover className={styles.table}>
                 <thead>
                     <tr>
                     <th></th>
@@ -28,7 +31,7 @@ export default function Register() {
                 <tbody>
                     {characters?.map(({id, name, species, image}) =>
                         <tr onClick={() => navigate(`/${id}`)}>
-                            <td><Image src={image} rounded height={'60px'}/></td>
+                            <td><Image src={image} rounded height={'25px'}/></td>
                             <td>{id}</td>
                             <td>{name}</td>
                             <td>{species}</td>
@@ -36,5 +39,12 @@ export default function Register() {
                     )}
                 </tbody>
             </Table>
+            { 
+                paging.total && 
+                    <Paging current={paging.current} 
+                            total={paging.total} 
+                            onChange={(target: number) => dispatch(loadCharacters(target))}
+                    /> 
+            }
         </div>;
   }

@@ -12,7 +12,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        app
           <Routes>
             <Route path="/" element={<Register/>}/>
             <Route path="/:id" element={<Card/>}/>
