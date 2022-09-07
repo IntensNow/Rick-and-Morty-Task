@@ -5,6 +5,7 @@ import { loadCharacter, selectCard } from "./cardSlice";
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
 import Spinner from 'react-bootstrap/Spinner';
+import styles from "./Card.module.css";
 
 export default function Card() {
     let { id } = useParams();
@@ -20,16 +21,16 @@ export default function Card() {
         return <Spinner animation="border" variant="light" />
     }
 
-    return <div>
+    return <div className={styles.container}>
             <Image src={character?.image}/>
-            <Table bordered hover>
+            <Table hover>
                 <tbody>
                     <tr>
-                        <td>name</td>
+                        <td>Name</td>
                         <td>{character?.name}</td>
                     </tr>
                     <tr>
-                        <td>origin</td>
+                        <td>Origin</td>
                         <td>{character?.origin.name}</td>
                     </tr>
                     <tr>
