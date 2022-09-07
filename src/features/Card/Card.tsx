@@ -4,19 +4,24 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { loadCharacter, selectCard } from "./cardSlice";
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function Card() {
     let { id } = useParams();
 
-    const { character } = useAppSelector(selectCard);
+    const { character, status } = useAppSelector(selectCard);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(loadCharacter(Number(id)));
     }, [])
 
+    if(status === "loading") {
+        return <Spinner animation="border" variant="light" />
+    }
+
     return <div>
-        <Image src={character?.image}/>
+            <Image src={character?.image}/>
             <Table bordered hover>
                 <tbody>
                     <tr>
