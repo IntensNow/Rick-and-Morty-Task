@@ -20,13 +20,19 @@ export default function Register() {
         dispatch(loadCharacters({ page: INITIAL_CURRENT_PAGE, filterName: "" }));
     }, [])
 
-    return <div>
+    return <div className={styles.container}>
             <Table striped bordered hover className={styles.table}>
                 <thead>
                     <tr>
                     <th></th>
                     <th>#</th>
-                    <th>Name <Input onChange={value => dispatch(changeFilterName(value))}/></th>
+                    <th className={styles.nameHeadingCell}>
+                        Name
+                        <Input 
+                            onChange={value => dispatch(changeFilterName(value))}
+                            className={styles.filterInput}
+                        />
+                    </th>
                     <th>Species</th>
                     </tr>
                 </thead>

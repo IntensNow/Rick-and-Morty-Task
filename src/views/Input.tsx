@@ -5,9 +5,10 @@ import InputGroup from 'react-bootstrap/InputGroup';
 interface IInput {
     onChange(value: string) : void;
     emitTimeout?: number;
+    className?: string;
 }
 
-export default function Input({ onChange, emitTimeout = 1000 }: IInput)  {
+export default function Input({ onChange, emitTimeout = 1000, className }: IInput)  {
     const [ value, setValue ] = useState("");
     const [ timerId, setTimerId ] = useState(0);
 
@@ -19,9 +20,8 @@ export default function Input({ onChange, emitTimeout = 1000 }: IInput)  {
     }
 
     return (
-        <InputGroup>
-            <InputGroup.Text>filter by name</InputGroup.Text>
-            <Form.Control placeholder="..." onChange={onInputChange} value={value}/>
+        <InputGroup className={className}>
+            <Form.Control placeholder="filter by name..." onChange={onInputChange} value={value}/>
         </InputGroup>
     )
 }

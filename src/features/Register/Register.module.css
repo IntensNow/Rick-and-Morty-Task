@@ -1,4 +1,17 @@
-.table {
-    width: 860px;
-    margin: 0 auto;
+.container {
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nameHeadingCell {
+    display: flex;
+    align-items: center;
+    border: none;
+    justify-content: space-around;
+}
+
+.filterInput {
+    width: 40% !important;
 }
