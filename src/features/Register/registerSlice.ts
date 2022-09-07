@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+import { AppThunk, RootState } from "../../app/store";
 import { ICharacter } from "../Card/cardSlice";
 import { fetchCharacters } from "./registerApi";
 
-type Nullable<T> = T | null;
+export type Nullable<T> = T | null;
 
 type ICharacters = Array<ICharacter>;
 
@@ -14,27 +14,30 @@ export interface IRegisterState {
       current: number;
       total: Nullable<number>;
     },
-    filter: {
-      name: Nullable<string>;
-    }
+    filterName: Nullable<string>;
 }
+
+export interface IloadCharactersParams {
+  page: number;
+  filterName: Nullable<string>;
+}
+
+export const INITIAL_CURRENT_PAGE = 1;
 
 const initialState: IRegisterState = {
     characters: null,
     status: 'idle',
     paging: {
-      current: 1,
+      current: INITIAL_CURRENT_PAGE,
       total: null
     },
-    filter: {
-      name: null
-    }
+    filterName: null
 }
 
 export const loadCharacters = createAsyncThunk(
     'register/fetchCharacters',
-    async (page: number) => {
-      const response = await fetchCharacters(page);
+    async ({ page, filterName }: IloadCharactersParams) => {
+      const response = await fetchCharacters(page, filterName);
 
       return {
         characters: response.results,
@@ -44,25 +47,16 @@ export const loadCharacters = createAsyncThunk(
     }
 )
 
-export const loadCharactersByName = createAsyncThunk(
-  'register/fetchCharactersByName',
-  async (page: number) => {
-    const response = await fetchCharacters(page);
-
-    return {
-      characters: response.results,
-      total: response.info.pages,
-      current: page
-    }
-  }
-)
-
 export const registerSlice = createSlice({
     name: 'register',
     initialState,
     reducers: {
-        setCharacters: (state, action: PayloadAction<ICharacters>) => {
-            state.characters = action.payload;
+        setFilterName: (state, action: PayloadAction<string>) => {
+          state.filterName = action.payload;
+          state.paging.current = 1;
+        },
+        setCurrentPage: (state, action: PayloadAction<number>) => {
+          state.paging.current = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -82,6 +76,27 @@ export const registerSlice = createSlice({
       }
 })
 
+export const { setFilterName, setCurrentPage } = registerSlice.actions;
+
 export const selectRegister = (state: RootState) => state.register;
+
+export const changePaging = 
+  (page: number): AppThunk =>
+  (dispatch, getState) => {
+    const { filterName } = selectRegister(getState());
+
+    dispatch(setCurrentPage(page));
+
+    dispatch(loadCharacters({ page, filterName }));
+  }
+
+export const changeFilterName = 
+  (filterName: string): AppThunk => 
+  (dispatch, getState) => {
+    dispatch(setCurrentPage(INITIAL_CURRENT_PAGE));
+    dispatch(setFilterName(filterName));
+
+    dispatch(loadCharacters({ page: INITIAL_CURRENT_PAGE, filterName }));
+  }
 
 export default registerSlice.reducer;

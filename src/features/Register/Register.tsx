@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
-import { loadCharacters, selectRegister } from "./registerSlice";
+import { changeFilterName, changePaging, INITIAL_CURRENT_PAGE, loadCharacters, selectRegister } from "./registerSlice";
 import { useNavigate } from "react-router-dom";
 
 import styles from './Register.module.css';
@@ -12,12 +12,12 @@ import Input from "../../views/Input";
 
 export default function Register() {
 
-    const { characters, paging } = useAppSelector(selectRegister);
+    const { characters, paging, filterName } = useAppSelector(selectRegister);
     const dispatch = useAppDispatch();
     let navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(loadCharacters(1));
+        dispatch(loadCharacters({ page: INITIAL_CURRENT_PAGE, filterName: "" }));
     }, [])
 
     return <div>
@@ -26,7 +26,7 @@ export default function Register() {
                     <tr>
                     <th></th>
                     <th>#</th>
-                    <th>Name <Input onChange={value => {}}/></th>
+                    <th>Name <Input onChange={value => dispatch(changeFilterName(value))}/></th>
                     <th>Species</th>
                     </tr>
                 </thead>
@@ -45,7 +45,7 @@ export default function Register() {
                 paging.total && 
                     <Paging current={paging.current} 
                             total={paging.total} 
-                            onChange={(target: number) => dispatch(loadCharacters(target))}
+                            onChange={page => dispatch(changePaging(page))}
                     /> 
             }
         </div>;
