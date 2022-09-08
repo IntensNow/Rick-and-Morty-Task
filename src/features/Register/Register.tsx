@@ -1,18 +1,19 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
-import { changeFilterName, changePaging, INITIAL_CURRENT_PAGE, loadCharacters, selectRegister } from "./registerSlice";
 import { useNavigate } from "react-router-dom";
 
+import { changeFilterName, changePaging, INITIAL_CURRENT_PAGE, loadCharacters, selectRegister } from "./registerSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import styles from './Register.module.css';
-
 import Paging from "../../views/Paging";
 import Input from "../../views/Input";
 import { RequestStatus } from "../../typing/types";
 import ErrorOverlay from "../../views/ErrorOverlay/ErrorOverlay";
 
-const REQUEST_ERROR_MESSAGE = "An error occurred while requesting a list of characters. Check internet connection";
+const REQUEST_ERROR_MESSAGE = `An error occurred while requesting a list of characters. 
+    Check internet connection 
+    or change filtering by name.`;
 
 export default function Register() {
 

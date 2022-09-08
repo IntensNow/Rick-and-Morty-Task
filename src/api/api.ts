@@ -10,6 +10,8 @@ export async function fetchCharacters(page: number, name: Nullable<string>) {
 
     try {
         const response = await fetch(`${baseApiUrl}/${params}`);
+        console.log('response in api is')
+        console.dir(response);
         if(response.ok) {
             let result = await response.json();
             return result;

@@ -36,6 +36,8 @@ export const loadCharacters = createAsyncThunk(
     async ({ page, filterName }: IloadCharactersParams) => {
       const response = await fetchCharacters(page, filterName);
 
+      console.dir(response);
+
       return {
         characters: response.results,
         total: response.info.pages,

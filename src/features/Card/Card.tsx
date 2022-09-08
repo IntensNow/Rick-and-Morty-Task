@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { loadCharacter, selectCard } from "./cardSlice";
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
 import Spinner from 'react-bootstrap/Spinner';
+
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { loadCharacter, selectCard } from "./cardSlice";
 import styles from "./Card.module.css";
 import ErrorOverlay from "../../views/ErrorOverlay/ErrorOverlay";
 import { RequestStatus } from "../../typing/types";
