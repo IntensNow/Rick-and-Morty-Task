@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# The project is the tesk task described below
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+Using a third-party API as a data source (example: Star Wars API https://swapi.dev/), implement a SPA React application consisting of two pages.
+On the main page, display a list or cards of characters, add the possibility of character search and pagination to the list.
+Implement a page with detailed information on the selected character.
+
+Pros:
++ Using TypeScript
++ Neat layout
++ Using UI framework (Material, Ant, Bootstrap, etc.)
+
+As an extra challenge:
++ To work with data, use storage (Redux, etc.)
++ Edit character information locally, without sending to server
+
+## How i worked on this project
+
++ I used react-create-app to quickly set up the project
++ I used github projects desk for plannig tasks
++ For API i used https://rickandmortyapi.com/ because rick and morty is awesome series.
+
+## Some technologies used
+
++ I used react-router for routing and didn't connect it with redux. 
++ I used React-bootstrap as a very convenient and lightweight UI-library
+
+## How to navigate this project
++ /api folder is for any server requests. based on the fetch API.
++ /app contains some helpers and configs for redux.
++ /features contains controller-like pages connected to redux.
++ /typing is for typescript related features.
++ /views contains redux-free components that is going to be rendered inside the "/features" controllers
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `yarn install` to install dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `yarn start` to start the project
