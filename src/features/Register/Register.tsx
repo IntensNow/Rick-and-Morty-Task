@@ -21,6 +21,7 @@ export default function Register() {
     }, [])
 
     return <div className={styles.container}>
+            <h1>Ultra Multi-Universe DB for Rick and Morty characters</h1>
             <Table striped bordered hover className={styles.table}>
                 <thead>
                     <tr>
