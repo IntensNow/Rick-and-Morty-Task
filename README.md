@@ -1,4 +1,4 @@
-# The project is the tesk task described below
+# The project is the test task described below
 
 Using a third-party API as a data source (example: Star Wars API https://swapi.dev/), implement a SPA React application consisting of two pages.
 On the main page, display a list or cards of characters, add the possibility of character search and pagination to the list.
