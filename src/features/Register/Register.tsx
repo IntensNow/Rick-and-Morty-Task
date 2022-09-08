@@ -39,7 +39,7 @@ export default function Register() {
                 </thead>
                 <tbody>
                     {characters?.map(({id, name, species, image}) =>
-                        <tr onClick={() => navigate(`/${id}`)}>
+                        <tr key={id} onClick={() => navigate(`/${id}`)}>
                             <td><Image src={image} rounded height={'25px'}/></td>
                             <td>{id}</td>
                             <td>{name}</td>
