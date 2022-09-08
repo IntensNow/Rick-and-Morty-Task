@@ -16,7 +16,7 @@ As an extra challenge:
 ## How i worked on this project
 
 + I used react-create-app to quickly set up the project
-+ I used github projects desk for plannig tasks
++ I used github projects desk for plannig tasks. [That's the link](https://github.com/users/IntensNow/projects/2/views/1)
 + For API i used https://rickandmortyapi.com/ because rick and morty is awesome series.
 
 ## Some technologies used
