@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { fetchCharacters } from "../../api/api";
 import { AppThunk, RootState } from "../../app/store";
 import { ICharacter, Nullable, RequestStatus } from "../../typing/types";

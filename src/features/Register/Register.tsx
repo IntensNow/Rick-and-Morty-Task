@@ -9,10 +9,14 @@ import styles from './Register.module.css';
 
 import Paging from "../../views/Paging";
 import Input from "../../views/Input";
+import { RequestStatus } from "../../typing/types";
+import ErrorOverlay from "../../views/ErrorOverlay/ErrorOverlay";
+
+const REQUEST_ERROR_MESSAGE = "An error occurred while requesting a list of characters. Check internet connection";
 
 export default function Register() {
 
-    const { characters, paging, filterName } = useAppSelector(selectRegister);
+    const { characters, paging, status } = useAppSelector(selectRegister);
     const dispatch = useAppDispatch();
     let navigate = useNavigate();
 
@@ -21,6 +25,7 @@ export default function Register() {
     }, [])
 
     return <div className={styles.container}>
+            { status === RequestStatus.FAILED && <ErrorOverlay text={REQUEST_ERROR_MESSAGE}/> }
             <h1>Ultra Multi-Universe DB for Rick and Morty characters</h1>
             <Table striped bordered hover className={styles.table}>
                 <thead>

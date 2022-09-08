@@ -22,10 +22,8 @@ export async function fetchCharacters(page: number, name: Nullable<string>) {
 export async function fetchSingleCharacter(id: number) {
     try {
         const response = await fetch(`${baseApiUrl}/${id}`);
-        console.log(response);
         if(response.ok) {
             let result = await response.json();
-            console.dir(result);
             return result;
         }
     } catch (error) {

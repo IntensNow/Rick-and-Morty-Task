@@ -6,6 +6,10 @@ import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
 import Spinner from 'react-bootstrap/Spinner';
 import styles from "./Card.module.css";
+import ErrorOverlay from "../../views/ErrorOverlay/ErrorOverlay";
+import { RequestStatus } from "../../typing/types";
+
+const REQUEST_ERROR_MESSAGE = "An error occurred while requesting character information. Check internet connection";
 
 export default function Card() {
     let { id } = useParams();
@@ -17,11 +21,12 @@ export default function Card() {
         dispatch(loadCharacter(Number(id)));
     }, [])
 
-    if(status === "loading") {
+    if(status === RequestStatus.LOADING) {
         return <Spinner animation="border" variant="light" />
     }
 
     return <div className={styles.container}>
+            { status === RequestStatus.FAILED && <ErrorOverlay text={REQUEST_ERROR_MESSAGE}/> }
             <Image src={character?.image}/>
             <Table hover>
                 <tbody>
