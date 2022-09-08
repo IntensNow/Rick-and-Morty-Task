@@ -1,15 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchCharacters } from "../../api/api";
 import { AppThunk, RootState } from "../../app/store";
-import { ICharacter } from "../Card/cardSlice";
-import { fetchCharacters } from "./registerApi";
-
-export type Nullable<T> = T | null;
-
-type ICharacters = Array<ICharacter>;
+import { ICharacter, Nullable, RequestStatus } from "../../typing/types";
 
 export interface IRegisterState {
     characters: Nullable<Array<ICharacter>>;
-    status: 'idle' | 'loading' | 'failed';
+    status: RequestStatus;
     paging: {
       current: number;
       total: Nullable<number>;
@@ -26,7 +22,7 @@ export const INITIAL_CURRENT_PAGE = 1;
 
 const initialState: IRegisterState = {
     characters: null,
-    status: 'idle',
+    status: RequestStatus.IDLE,
     paging: {
       current: INITIAL_CURRENT_PAGE,
       total: null
@@ -61,17 +57,17 @@ export const registerSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-          .addCase(loadCharacters.pending, (state) => {
-            state.status = 'loading';
+          .addCase(loadCharacters.pending, state => {
+            state.status = RequestStatus.LOADING;
           })
           .addCase(loadCharacters.fulfilled, (state, action) => {
-            state.status = 'idle';
+            state.status = RequestStatus.IDLE;
             state.characters = action.payload.characters;
             state.paging.total = action.payload.total;
             state.paging.current = action.payload.current;
           })
-          .addCase(loadCharacters.rejected, (state) => {
-            state.status = 'failed';
+          .addCase(loadCharacters.rejected, state => {
+            state.status = RequestStatus.FAILED;
           });
       }
 })
@@ -92,7 +88,7 @@ export const changePaging =
 
 export const changeFilterName = 
   (filterName: string): AppThunk => 
-  (dispatch, getState) => {
+  dispatch => {
     dispatch(setCurrentPage(INITIAL_CURRENT_PAGE));
     dispatch(setFilterName(filterName));
 
